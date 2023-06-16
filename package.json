@@ -1,0 +1,22 @@
+{
+  "name": "js-benchmark-tool-comparison",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "benchmark": "find ./src/tests -name '*.mjs' -exec node {} \\;",
+    "benchmark:update": "find ./src/tests -name '*.mjs' -exec node {} \\; | tee latest.txt && sed -i -r \"s/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g\" latest.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "mitata": "^0.1.6",
+    "mitt": "^3.0.0",
+    "tinybench": "^2.5.0",
+    "tseep": "^1.1.1",
+    "zod": "^3.21.4",
+    "zodbus": "^1.0.3"
+  }
+}
