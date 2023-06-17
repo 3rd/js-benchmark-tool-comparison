@@ -4,14 +4,19 @@ import _mitt from "mitt";
 import { EventEmitter } from "tseep";
 import { benchmark } from "../runner.mjs";
 
+// eslint-disable-next-line no-unused-vars
+function handler(_a, _b) {
+  if (arguments.length > 100) console.log("check");
+}
+
 const zodbus = create({ schema: { foo: z.string() }, validate: false });
-zodbus.subscribe("foo", () => {});
+zodbus.subscribe("foo", handler);
 
 const mitt = _mitt();
-mitt.on("foo", () => {});
+mitt.on("foo", handler);
 
 const tseep = new EventEmitter();
-tseep.on("foo", () => {});
+tseep.on("foo", handler);
 
 benchmark({
   name: "event emitters",
