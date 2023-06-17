@@ -30,6 +30,8 @@ const runners = {
     console.table(bench.table());
   },
   mitata: async (tasks) => {
+    // eslint-disable-next-line no-empty-function
+    mitata.bench("noop", () => {});
     mitata.group(() => {
       for (const task of tasks) {
         mitata.bench(task.name, task.run);

@@ -8,16 +8,18 @@ function eventHandler(a, b, c, d) {
 const tseep = new EventEmitter();
 tseep.on("foo", eventHandler);
 
+mitata.bench("noop", () => {});
+
 mitata.group(() => {
-  mitata.bench("tseep emit", function () {
-    tseep.emit("foo", "bar");
-    tseep.emit("foo", "baz");
-    tseep.emit("foo", "boom");
-  });
   mitata.bench("direct call", function () {
     eventHandler("bar");
     eventHandler("baz");
     eventHandler("boom");
+  });
+  mitata.bench("tseep emit", function () {
+    tseep.emit("foo", "bar");
+    tseep.emit("foo", "baz");
+    tseep.emit("foo", "boom");
   });
 }, false);
 await mitata.run();
