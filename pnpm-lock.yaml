@@ -9,8 +9,8 @@ dependencies:
     specifier: latest
     version: 2.1.4
   benchmate:
-    specifier: ^1.0.3
-    version: 1.0.3
+    specifier: ^1.3.0
+    version: 1.3.0
   mitata:
     specifier: latest
     version: 0.1.6
@@ -39,8 +39,8 @@ packages:
       platform: 1.3.6
     dev: false
 
-  /benchmate@1.0.3:
-    resolution: {integrity: sha512-/MsE2msBadE9DmRlzV3rKmywBf6YZ5R+LHkibqtawKgO1Yro/vpDs9eSxrqpI0MzjT/QyDZA7J5JG8INMt3D1Q==}
+  /benchmate@1.3.0:
+    resolution: {integrity: sha512-vUW+2Gaevp3N/s+Vtx2duJd/N9TW2FoWhfCUWUkKTNnqIWuKYPvH/GTbQDbZkzI7Dn8dss+IPBC9Rer7N9+LzA==}
     dev: false
 
   /lodash@4.17.21:

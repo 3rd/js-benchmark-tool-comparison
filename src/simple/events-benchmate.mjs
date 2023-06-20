@@ -11,38 +11,37 @@ const counts = {
   mitt: 0,
 };
 
-const handlers = {
-  direct: function () {
-    counts.direct++;
-  },
-  tseep: function () {
-    counts.tseep++;
-  },
-  zodbus: function () {
-    counts.zodbus++;
-  },
-  mitt: function () {
-    counts.mitt++;
-  },
+const handleDirect = function () {
+  counts.direct++;
+};
+const handleTseep = function () {
+  counts.tseep++;
+};
+const handleZodbus = function () {
+  counts.zodbus++;
+};
+const handleMitt = function () {
+  counts.mitt++;
 };
 
 const zodbus = create({ schema: { foo: z.string() }, validate: false });
-zodbus.subscribe("foo", handlers.zodbus);
+zodbus.subscribe("foo", handleZodbus);
 
 const tseep = new EventEmitter();
-tseep.on("foo", handlers.tseep);
+tseep.on("foo", handleTseep);
 
 const mitt = _mitt();
-mitt.on("foo", handlers.mitt);
+mitt.on("foo", handleMitt);
 
 const bench = new Bench({
-  iterations: 10_000_000,
+  // iterations: 10_000_000,
+  // time: 2000,
 });
 
 bench.add("direct call", () => {
-  handlers.direct("bar");
-  handlers.direct("baz");
-  handlers.direct("boom");
+  handleDirect();
+  handleDirect();
+  handleDirect();
 });
 
 bench.add("tseep", function () {
@@ -64,3 +63,4 @@ bench.add("mitt", function () {
 });
 
 await bench.run();
+console.log(counts);
