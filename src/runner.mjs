@@ -1,6 +1,7 @@
 import Benchmark from "benchmark";
 import * as tinybench from "tinybench";
 import * as mitata from "mitata";
+import * as benchmate from "benchmate";
 import { banner, logRun } from "./utils.mjs";
 
 const runners = {
@@ -38,6 +39,13 @@ const runners = {
       }
     }, false);
     await mitata.run();
+  },
+  benchmate: async (tasks) => {
+    const bench = new benchmate.Bench();
+    for (const task of tasks) {
+      bench.add(task.name, task.run);
+    }
+    await bench.run();
   },
 };
 

@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -6,25 +6,28 @@ settings:
 
 dependencies:
   benchmark:
-    specifier: ^2.1.4
+    specifier: latest
     version: 2.1.4
+  benchmate:
+    specifier: ^1.0.3
+    version: 1.0.3
   mitata:
-    specifier: ^0.1.6
+    specifier: latest
     version: 0.1.6
   mitt:
-    specifier: ^3.0.0
+    specifier: latest
     version: 3.0.0
   tinybench:
-    specifier: ^2.5.0
+    specifier: latest
     version: 2.5.0
   tseep:
-    specifier: ^1.1.1
+    specifier: latest
     version: 1.1.1
   zod:
-    specifier: ^3.21.4
+    specifier: latest
     version: 3.21.4
   zodbus:
-    specifier: ^1.0.3
+    specifier: latest
     version: 1.0.3(zod@3.21.4)
 
 packages:
@@ -34,6 +37,10 @@ packages:
     dependencies:
       lodash: 4.17.21
       platform: 1.3.6
+    dev: false
+
+  /benchmate@1.0.3:
+    resolution: {integrity: sha512-/MsE2msBadE9DmRlzV3rKmywBf6YZ5R+LHkibqtawKgO1Yro/vpDs9eSxrqpI0MzjT/QyDZA7J5JG8INMt3D1Q==}
     dev: false
 
   /lodash@4.17.21:

@@ -4,25 +4,43 @@ import { create } from "zodbus";
 import { EventEmitter } from "tseep";
 import _mitt from "mitt";
 
-function eventHandler(a, b, c, d) {
-  if (arguments.length > 100) console.log("check");
-}
+const counts = {
+  direct: 0,
+  tseep: 0,
+  zodbus: 0,
+  mitt: 0,
+};
+
+const handlers = {
+  direct: function () {
+    counts.direct++;
+  },
+  tseep: function () {
+    counts.tseep++;
+  },
+  zodbus: function () {
+    counts.zodbus++;
+  },
+  mitt: function () {
+    counts.mitt++;
+  },
+};
 
 const zodbus = create({ schema: { foo: z.string() }, validate: false });
-zodbus.subscribe("foo", eventHandler);
+zodbus.subscribe("foo", handlers.zodbus);
 
 const tseep = new EventEmitter();
-tseep.on("foo", eventHandler);
+tseep.on("foo", handlers.tseep);
 
 const mitt = _mitt();
-mitt.on("foo", eventHandler);
+mitt.on("foo", handlers.mitt);
 
-const bench = new tinybench.Bench();
+const bench = new tinybench.Bench({ now: tinybench.hrtimeNow });
 
 bench.add("direct call", function () {
-  eventHandler("bar");
-  eventHandler("baz");
-  eventHandler("boom");
+  handlers.direct("bar");
+  handlers.direct("baz");
+  handlers.direct("boom");
 });
 
 bench.add("zodbus", function () {
