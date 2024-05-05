@@ -11,16 +11,20 @@ const counts = {
   mitt: 0,
 };
 
-const handleDirect = function () {
+const handleDirect = function (data) {
+  if (data === "x") return false;
   counts.direct++;
 };
-const handleTseep = function () {
+const handleTseep = function (data) {
+  if (data === "x") return false;
   counts.tseep++;
 };
-const handleZodbus = function () {
+const handleZodbus = function (data) {
+  if (data === "x") return false;
   counts.zodbus++;
 };
-const handleMitt = function () {
+const handleMitt = function (data) {
+  if (data === "x") return false;
   counts.mitt++;
 };
 
@@ -33,18 +37,15 @@ tseep.on("foo", handleTseep);
 const mitt = _mitt();
 mitt.on("foo", handleMitt);
 
-const bench = new Bench({
-  // iterations: 10_000_000,
-  // time: 2000,
+const bench = new Bench();
+
+bench.add("direct-call", () => {
+  handleDirect("bar");
+  handleDirect("baz");
+  handleDirect("boom");
 });
 
-bench.add("direct call", () => {
-  handleDirect();
-  handleDirect();
-  handleDirect();
-});
-
-bench.add("tseep", function () {
+bench.add("tseep-unrolled", function () {
   tseep.emit("foo", "bar");
   tseep.emit("foo", "baz");
   tseep.emit("foo", "boom");
@@ -63,4 +64,4 @@ bench.add("mitt", function () {
 });
 
 await bench.run();
-console.log(counts);
+// console.log(counts);

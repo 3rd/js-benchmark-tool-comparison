@@ -11,35 +11,37 @@ const counts = {
   mitt: 0,
 };
 
-const handlers = {
-  direct: function () {
-    counts.direct++;
-  },
-  tseep: function () {
-    counts.tseep++;
-  },
-  zodbus: function () {
-    counts.zodbus++;
-  },
-  mitt: function () {
-    counts.mitt++;
-  },
+const handleDirect = function (data) {
+  if (data === "x") return false;
+  counts.direct++;
+};
+const handleTseep = function (data) {
+  if (data === "x") return false;
+  counts.tseep++;
+};
+const handleZodbus = function (data) {
+  if (data === "x") return false;
+  counts.zodbus++;
+};
+const handleMitt = function (data) {
+  if (data === "x") return false;
+  counts.mitt++;
 };
 
 const zodbus = create({ schema: { foo: z.string() }, validate: false });
-zodbus.subscribe("foo", handlers.zodbus);
+zodbus.subscribe("foo", handleZodbus);
 
 const tseep = new EventEmitter();
-tseep.on("foo", handlers.tseep);
+tseep.on("foo", handleTseep);
 
 const mitt = _mitt();
-mitt.on("foo", handlers.mitt);
+mitt.on("foo", handleMitt);
 
 new benchmark.Suite()
   .add("direct call", function () {
-    handlers.direct("bar");
-    handlers.direct("baz");
-    handlers.direct("boom");
+    handleDirect("bar");
+    handleDirect("baz");
+    handleDirect("boom");
   })
   .add("tseep", function () {
     tseep.emit("foo", "bar");
